@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.cm-s-material.CodeMirror {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.cm-s-material.CodeMirror .CodeMirror-scroll {
+  overflow: hidden !important;
+}
+
+.cm-s-material.CodeMirror .CodeMirror-lines {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.cm-s-material.CodeMirror {
+  height: auto;
+  min-height: 300px;
+}
+
+.react-resizable {
+  height: auto !important;
+}
+
+.react-resizable-handle {
+  opacity: 0;
+}
+
+.react-resizable-handle:hover {
+  opacity: 1;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-shadow-md {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+h1#title {
+  background: linear-gradient(170deg, rgb(129, 230, 217), rgb(246, 135, 179));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content;
+}
