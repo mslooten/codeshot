@@ -16,8 +16,10 @@ function App() {
   const [lang, langSelect] = React.useState("javascript");
   const [gist, setGist] = React.useState("");
   const [loaded, setLoaded] = React.useState(false);
+  const [attribution, setAttribution] = React.useState("snippetshot.com");
 
-  const [colors, setColors] = React.useState(["rgb(129, 230, 217)", "rgb(251, 182, 206)"]);
+  // const [colors, setColors] = React.useState(["rgb(129, 230, 217)", "rgb(251, 182, 206)"]);
+  const [colors, setColors] = React.useState(["rgb(254, 215, 226)", "rgb(190, 227, 248)"]);
   const [angle, setAngle] = React.useState("150");
 
   React.useEffect(() => {
@@ -112,7 +114,7 @@ function App() {
       <div className="container mx-auto mw-1/2 p-6">
         <div className="flex justify-center items-stretch">
           <img src="/snippet-shot.svg" alt="Snippet Shot Logo" className="w-6 opacity-75" />
-          <h1 id="title" className="ml-4 text-center text-pink-600 text-4xl font-mono font-bold uppercase">
+          <h1 id="title" className="ml-4 text-center text-gray-700 text-5xl font-mono font-bold uppercase">
             Snippet Shot
           </h1>
         </div>
@@ -146,27 +148,41 @@ function App() {
                     />
                   )}
                 </div>
-                <div className="flex justify-center absolute bottom-0 mb-4 opacity-75 right-0 left-0 w-full">
-                  <div className="px-2 bg-white text-gray-600 rounded-full text-xs whitespace-no-wrap">snippetshot.com</div>
-                </div>
+                {attribution.length > 0 && (
+                  <div className="flex justify-center absolute bottom-0 mb-4 opacity-75 right-0 left-0 w-full">
+                    <div className="px-2 bg-white text-gray-600 rounded-full text-xs whitespace-no-wrap">{attribution}</div>
+                  </div>
+                )}
               </div>
             </div>
           </ResizableBox>
         </div>
-        <div className="flex my-4 justify-center">
-          <button className="shadow border rounded py-2 px-3 text-gray-700 leading-tight" onClick={download}>
+        <div className="flex my-6 justify-center">
+          <button
+            className="shadow border rounded py-2 px-3 text-gray-700 leading-tight hover:shadow-lg transition-all duration-200"
+            onClick={download}
+          >
             Download your Snippet Shot
           </button>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-600 text-sm font-bold mb-2" htmlFor="gist">
-            Github gist url <span className="font-normal text-xs text-gray-500">(or just paste your code in the edit window below)</span>
+        <div className="mb-4 grid grid-cols-3">
+          <label className="block text-gray-600 text-sm font-bold mb-2 col-span-2" htmlFor="gist">
+            Github gist url <span className="font-normal text-xs text-gray-500">(or just paste your code in the edit window above)</span>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="gist"
               type="url"
               placeholder="url"
               onChange={getGist}
+            />
+          </label>
+          <label className="block text-gray-600 text-sm font-bold mb-2 ml-2">
+            Attribution
+            <input
+              type="text"
+              value={attribution}
+              onChange={(e) => setAttribution(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </label>
         </div>
@@ -200,7 +216,6 @@ function App() {
             <br />
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="gist"
               type="number"
               placeholder="Gradient rotation"
               min="0"

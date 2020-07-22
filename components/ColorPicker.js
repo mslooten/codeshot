@@ -4,7 +4,7 @@ import ColorBlock from './ColorBlock';
 
 const ColorPicker = (props) => {
   const { colors, setColors } = props;
-  const [selected, setSelected] = React.useState(["teal-300", "pink-300"]);
+  const [selected, setSelected] = React.useState(["pink-200", "blue-200"]);
   const baseColors = ["gray", "red", "orange", "yellow", "green", "teal", "blue", "indigo", "purple", "pink"];
   const intensities = [100, 200, 300, 400, 500, 600, 700, 800, 900];
   const colorIntensities = [];
