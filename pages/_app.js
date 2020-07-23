@@ -271,6 +271,13 @@ function App() {
           <a className="underline text-pink-500 hover:text-indigo-500 transition-colors duration-200" href="https://marcoslooten.com/">
             Marco Slooten
           </a>
+          <br />
+          <a
+            className="text-xs underline text-gray-600 hover:text-indigo-500 transition-colors duration-200"
+            href="https://marcoslooten.com/privacy/"
+          >
+            Privacy
+          </a>
         </p>
       </div>
     </>
