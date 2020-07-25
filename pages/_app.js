@@ -5,33 +5,42 @@ import 'codemirror/theme/material.css';
 import domtoimage from 'dom-to-image';
 import Head from 'next/head';
 import React from 'react';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
+import { UnControlled } from 'react-codemirror2';
 import { ResizableBox } from 'react-resizable';
 
 import ColorPicker from '../components/ColorPicker';
+import CM_MODES from '../data/modes';
 
 require("react-resizable/css/styles.css");
 
 function App() {
-  const [lang, langSelect] = React.useState("javascript");
+  const [modes, setModes] = React.useState([]);
+  const [lang, setLang] = React.useState("JavaScript");
+  const [mimeType, setMime] = React.useState("application/javascript");
   const [gist, setGist] = React.useState("");
   const [loaded, setLoaded] = React.useState(false);
   const [attribution, setAttribution] = React.useState("snippetshot.com");
   const [hover, setHover] = React.useState(false);
 
-  // const [colors, setColors] = React.useState(["rgb(129, 230, 217)", "rgb(251, 182, 206)"]);
+  console.log(process.env.NODE_ENV);
+
   const [colors, setColors] = React.useState(["rgb(254, 215, 226)", "rgb(190, 227, 248)"]);
   const [angle, setAngle] = React.useState("150");
 
   React.useEffect(() => {
-    require("codemirror/mode/javascript/javascript");
-    require("codemirror/mode/htmlmixed/htmlmixed");
-    require("codemirror/mode/css/css");
+    require("codemirror/mode/javascript/javascript.js");
+    require("codemirror/mode/clike/clike");
+
+    setModes(CM_MODES);
     setLoaded(true);
   }, []);
 
   const changeLang = (e) => {
-    langSelect(e.target.value);
+    const lang = e.target.value;
+    const { mode, mime, mimes } = modes.find((mode) => mode.name === e.target.value);
+    require(`codemirror/mode/${mode}/${mode}.js`);
+    setLang(lang);
+    setMime((mimes && mimes[0]) || mime);
   };
 
   const getGist = (e) => {
@@ -120,18 +129,22 @@ function App() {
           media={loaded ? "all" : "print"}
         />
         <title>Snippet Shot</title>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-20731045-2" />
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-20731045-2" />
 
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'UA-20731045-2', { anonymize_ip: true });
         `
-          }}
-        />
+              }}
+            />
+          </>
+        )}
       </Head>
       <div className="container mx-auto mw-1/2 p-6">
         <div className="flex justify-center items-stretch">
@@ -158,10 +171,10 @@ function App() {
               >
                 <div className="overflow-hidden rounded-md shadow-xl">
                   {loaded && (
-                    <CodeMirror
+                    <UnControlled
                       value={gist}
                       options={{
-                        mode: lang,
+                        mode: mimeType,
                         theme: "material",
                         lineNumbers: false,
                         lineWrapping: true,
@@ -236,9 +249,11 @@ function App() {
                 value={lang}
                 className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               >
-                <option value="htmlmixed">HTML</option>
-                <option value="css">CSS</option>
-                <option value="javascript">JavaScript</option>
+                {modes.map((mode) => (
+                  <option value={mode.name} key={mode.name}>
+                    {mode.name}
+                  </option>
+                ))}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

@@ -11,6 +11,7 @@ code,
 .cm-s-material.CodeMirror {
   padding-left: 1rem;
   padding-right: 1rem;
+  font-size: 1rem;
 }
 
 .cm-s-material.CodeMirror .CodeMirror-scroll {
