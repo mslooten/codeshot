@@ -22,8 +22,6 @@ function App() {
   const [attribution, setAttribution] = React.useState("snippetshot.com");
   const [hover, setHover] = React.useState(false);
 
-  console.log(process.env.NODE_ENV);
-
   const [colors, setColors] = React.useState(["rgb(254, 215, 226)", "rgb(190, 227, 248)"]);
   const [angle, setAngle] = React.useState("150");
 
@@ -181,6 +179,12 @@ function App() {
                         scrollbarStyle: null
                       }}
                     />
+                  )}
+
+                  {!loaded && (
+                    <div className="react-codemirror2">
+                      <div className="CodeMirror cm-s-material CodeMirror-wrap"></div>
+                    </div>
                   )}
                 </div>
                 {attribution.length > 0 && (
