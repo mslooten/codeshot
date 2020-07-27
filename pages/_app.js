@@ -21,6 +21,8 @@ function App() {
   const [loaded, setLoaded] = React.useState(false);
   const [attribution, setAttribution] = React.useState("snippetshot.com");
   const [hover, setHover] = React.useState(false);
+  const [isSafari, setSafari] = React.useState(false);
+  const [format, setFormat] = React.useState("png");
 
   const [colors, setColors] = React.useState(["rgb(254, 215, 226)", "rgb(190, 227, 248)"]);
   const [angle, setAngle] = React.useState("150");
@@ -28,6 +30,13 @@ function App() {
   React.useEffect(() => {
     require("codemirror/mode/javascript/javascript.js");
     require("codemirror/mode/clike/clike");
+    if (
+      navigator.userAgent.indexOf("Safari/") > -1 &&
+      navigator.userAgent.indexOf("Chrome/") == -1 &&
+      navigator.userAgent.indexOf("Chromium/") == -1
+    ) {
+      setSafari(true);
+    }
 
     setModes(CM_MODES);
     setLoaded(true);
@@ -60,9 +69,9 @@ function App() {
       });
   };
 
-  const downloadBlob = (blob, name = "file.png") => {
+  const downloadBlob = (blob, name = "file.png", svg = false) => {
     // Convert your blob into a Blob URL (a special url that points to an object in the browser's memory)
-    const blobUrl = URL.createObjectURL(blob);
+    const blobUrl = svg ? blob : URL.createObjectURL(blob);
 
     // Create a link element
     const link = document.createElement("a");
@@ -98,9 +107,15 @@ function App() {
       },
       width: code.offsetWidth * scale
     };
-    domtoimage.toBlob(code, obj).then((blob) => {
-      downloadBlob(blob, `snippetshot-${new Date().toLocaleDateString()}`);
-    });
+    if (isSafari || format === "svg") {
+      domtoimage.toSvg(code).then((dataUrl) => {
+        downloadBlob(dataUrl, `snippetshot-${new Date().toLocaleDateString()}.svg`, true);
+      });
+    } else {
+      domtoimage.toBlob(code, obj).then((blob) => {
+        downloadBlob(blob, `snippetshot-${new Date().toLocaleDateString()}.png`);
+      });
+    }
   };
 
   return (
@@ -145,8 +160,8 @@ function App() {
         )}
       </Head>
       <div className="container mx-auto mw-1/2 p-6">
-        <div className="flex justify-center items-stretch">
-          <img src="/snippet-shot.svg" alt="Snippet Shot Logo" className="w-6" />
+        <div className="flex justify-center items-center">
+          <img src="/snippet-shot.svg" alt="Snippet Shot Logo" className="w-6 h-6" />
           <h1 id="title" className="ml-4 text-center text-gray-700 text-5xl font-mono font-bold uppercase">
             Snippet Shot
           </h1>
@@ -197,7 +212,7 @@ function App() {
                 <div className="absolute flex text-xs text-gray-500 right-0 mt-2">
                   Resize me
                   <svg
-                    className="w-4 text-pink-500 ml-2"
+                    className="w-4 h-4 text-pink-500 ml-2"
                     fillRule="evenodd"
                     strokeLinejoin="round"
                     strokeMiterlimit="2"
@@ -223,7 +238,7 @@ function App() {
             Download your Snippet Shot
           </button>
         </div>
-        <div className="mb-4 grid grid-cols-3">
+        <div className="mb-4 grid grid-cols-4 gap-4">
           <label className="block text-gray-600 text-sm font-bold mb-2 col-span-2" htmlFor="gist">
             Github gist url <span className="font-normal text-xs text-gray-500">(or just paste your code in the edit window above)</span>
             <input
@@ -234,7 +249,28 @@ function App() {
               onChange={getGist}
             />
           </label>
-          <label className="block text-gray-600 text-sm font-bold mb-2 ml-2">
+          <label className="text-gray-600 text-sm font-bold block">
+            File format:
+            {isSafari && <p className="font-normal text-gray-500 text-xs">Unfortunately, at the moment Safari only gets SVG export</p>}
+            {!isSafari && (
+              <div className="block relative w-full mb-4">
+                <select
+                  onChange={(e) => setFormat(e.target.value)}
+                  value={format}
+                  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                >
+                  <option value="png">PNG</option>
+                  <option value="svg">SVG</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+            )}
+          </label>
+          <label className="block text-gray-600 text-sm font-bold mb-2">
             Attribution
             <input
               type="text"
