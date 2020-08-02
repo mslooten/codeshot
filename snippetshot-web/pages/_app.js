@@ -44,6 +44,12 @@ function App() {
 
   const changeLang = (e) => {
     const lang = e.target.value;
+    if (typeof gtag !== "undefined") {
+      gtag("event", "langchange", {
+        event_category: "settings",
+        event_label: lang
+      });
+    }
     const { mode, mime, mimes } = modes.find((mode) => mode.name === e.target.value);
     require(`codemirror/mode/${mode}/${mode}.js`);
     setLang(lang);
