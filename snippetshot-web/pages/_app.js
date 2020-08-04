@@ -97,6 +97,7 @@ function App() {
   };
 
   const download = () => {
+    setHover(false);
     if (typeof gtag !== "undefined") {
       gtag("event", "download", {
         event_category: "settings",
