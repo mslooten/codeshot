@@ -34,7 +34,7 @@ const Settings = (props) => {
         <label className="text-gray-600 text-sm font-bold block">
           Font:
           <div className="block relative w-full mb-4">
-            <div className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline font-mono text-gray-700">
+            <div className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline font-mono font-normal text-gray-700">
               MonoLisa{" "}
               <a
                 className="text-xs text-gray-500 hover:underline hover:text-pink-500 transition-colors duration-300"
