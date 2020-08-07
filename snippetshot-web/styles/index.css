@@ -5,7 +5,7 @@
 code,
 .cm-s-material.CodeMirror,
 .font-mono {
-  font-family: "MonoLisa", "Fira Code", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: "MonoLisa", Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .cm-s-material.CodeMirror {
