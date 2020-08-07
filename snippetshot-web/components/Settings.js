@@ -20,7 +20,7 @@ const Settings = (props) => {
   } = props;
   return (
     <>
-      <div className="mb-4 grid grid-cols-4 gap-4">
+      <div className="mb-4 grid grid-cols-5 gap-4">
         <label className="block text-gray-600 text-sm font-bold mb-2 col-span-2" htmlFor="gist">
           Github gist url <span className="font-normal text-xs text-gray-500">(or just paste your code in the edit window above)</span>
           <input
@@ -31,6 +31,21 @@ const Settings = (props) => {
             onChange={getGist}
           />
         </label>
+        <label className="text-gray-600 text-sm font-bold block">
+          Font:
+          <div className="block relative w-full mb-4">
+            <div className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline font-mono text-gray-700">
+              MonoLisa{" "}
+              <a
+                className="text-xs text-gray-500 hover:underline hover:text-pink-500 transition-colors duration-300"
+                href={process.env.AFF}
+              >
+                (buy here)
+              </a>
+            </div>
+          </div>
+        </label>
+
         <label className="text-gray-600 text-sm font-bold block">
           File format:
           {isSafari && <p className="font-normal text-gray-500 text-xs">Unfortunately, at the moment Safari only gets SVG export</p>}
