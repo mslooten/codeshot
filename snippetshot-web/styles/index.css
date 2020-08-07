@@ -6,6 +6,12 @@ code,
 .cm-s-material.CodeMirror,
 .font-mono {
   font-family: "MonoLisa", Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-variant-ligatures: none;
+}
+
+.cm-s-material.CodeMirror pre.CodeMirror-line,
+.cm-s-material.CodeMirror pre.CodeMirror-line-like {
+  font-variant-ligatures: none;
 }
 
 .cm-s-material.CodeMirror {
