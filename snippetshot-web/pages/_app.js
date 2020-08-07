@@ -1,3 +1,4 @@
+import '../fonts/monolisa.css';
 import '../styles/index.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
@@ -146,11 +147,11 @@ function App() {
       <Header loaded={loaded} />
 
       <div className="container mx-auto mw-1/2 p-6">
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center mb-4">
           <img src="/snippet-shot.svg" alt="Snippet Shot Logo" className="w-6 h-6" />
-          <h1 id="title" className="ml-4 text-center text-gray-700 text-5xl font-mono font-bold uppercase">
-            Snippet Shot
-          </h1>
+          <img src="/snippet-shot-text.svg" alt="Snippet Shot Text Logo" className="ml-4 w-1/3 h-auto" />
+
+          <h1 className="sr-only">Snippet Shot</h1>
         </div>
         <h2 className="text-center font-mono text-gray-600">
           Generate screenshots{" "}
@@ -175,8 +176,11 @@ function App() {
 
         <p className="mt-8 text-center text-gray-600 text-sm">
           A side project made by{" "}
-          <a className="underline text-pink-500 hover:text-indigo-500 transition-colors duration-200" href="https://marcoslooten.com/">
-            Marco Slooten
+          <a
+            className="underline text-pink-500 hover:text-indigo-500 transition-colors duration-200"
+            href="https://twitter.com/MarcoSlooten"
+          >
+            @MarcoSlooten
           </a>
           <br />
           <a

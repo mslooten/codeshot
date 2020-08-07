@@ -5,7 +5,7 @@
 code,
 .cm-s-material.CodeMirror,
 .font-mono {
-  font-family: "Fira Code", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: "MonoLisa", "Fira Code", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .cm-s-material.CodeMirror {
@@ -52,11 +52,13 @@ code,
   text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
-h1#title {
-  /* background: linear-gradient(170deg, rgb(129, 230, 217), rgb(246, 135, 179)); */
+.text-logo {
+  width: 400px;
+  max-width: 100%;
   background: linear-gradient(150deg, rgb(246, 135, 179), rgb(102, 126, 234));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  width: fit-content;
+  /* color: black; */
+  fill: linear-gradient(150deg, rgb(246, 135, 179), rgb(102, 126, 234));
 }
