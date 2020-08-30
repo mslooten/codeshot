@@ -18,6 +18,8 @@ code,
   padding-left: 1rem;
   padding-right: 1rem;
   font-size: 1rem;
+  height: auto;
+  min-height: 300px;
 }
 
 .cm-s-material.CodeMirror .CodeMirror-scroll {
@@ -27,11 +29,6 @@ code,
 .cm-s-material.CodeMirror .CodeMirror-lines {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.cm-s-material.CodeMirror {
-  height: auto;
-  min-height: 300px;
 }
 
 .react-resizable {
@@ -56,4 +53,11 @@ code,
 
 .text-shadow-lg {
   text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Select */
+.select__value-container .select__single-value,
+.select__option {
+  color: #718096;
+  font-weight: normal;
 }

@@ -6,7 +6,6 @@ Contributions are welcome, but aware that it should not be a [Carbon](https://ca
 
 So the feature set will remain sparse, but there's a few areas I think we could improve on:
 
-- Adding more languages! I've been lazy and just added the languages I use the most.
 - Storing the last-used settings in localstorage (and retreiving them, obviously)
 - Adding a custom watermark image (e.g. a logo or something) on one of 8 positions (left, right, center x top, middle, bottom).
 - Doing some more work on cross-browser

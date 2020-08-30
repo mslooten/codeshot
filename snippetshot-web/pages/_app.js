@@ -11,6 +11,7 @@ import Header from '../components/Header';
 import Settings from '../components/Settings';
 import CM_MODES from '../data/modes';
 
+// import '../styles/theme.css';
 require("react-resizable/css/styles.css");
 
 function App() {
@@ -43,8 +44,8 @@ function App() {
   }, []);
 
   const changeLang = (e) => {
-    const lang = e.target.value;
-    const { mode, mime, mimes } = modes.find((mode) => mode.name === e.target.value);
+    const lang = e.value;
+    const { mode, mime, mimes } = modes.find((mode) => mode.name === lang);
     require(`codemirror/mode/${mode}/${mode}.js`);
     setLang(lang);
     setMime((mimes && mimes[0]) || mime);
