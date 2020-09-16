@@ -4,6 +4,7 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 
 import domtoimage from 'dom-to-image';
+import LZUTF8 from 'lzutf8';
 import React from 'react';
 
 import Editor from '../components/Editor';
@@ -11,7 +12,6 @@ import Header from '../components/Header';
 import Settings from '../components/Settings';
 import CM_MODES from '../data/modes';
 
-// import '../styles/theme.css';
 require("react-resizable/css/styles.css");
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
   const [hover, setHover] = React.useState(false);
   const [isSafari, setSafari] = React.useState(false);
   const [format, setFormat] = React.useState("png");
+  const [url, setUrl] = React.useState("");
 
   const [colors, setColors] = React.useState(["rgb(254, 215, 226)", "rgb(190, 227, 248)"]);
   const [angle, setAngle] = React.useState("150");
@@ -38,10 +39,31 @@ function App() {
     ) {
       setSafari(true);
     }
-
     setModes(CM_MODES);
+    if (window.location.hash) {
+      const codeObj = JSON.parse(LZUTF8.decompress(window.location.hash.split("#")[1], { inputEncoding: "Base64" }));
+      setGist(codeObj.gist);
+      const { mode, mime, mimes } = CM_MODES.find((mode) => mode.name === codeObj.lang);
+      require(`codemirror/mode/${mode}/${mode}.js`);
+      setLang(codeObj.lang);
+      setMime((mimes && mimes[0]) || mime);
+      setColors(codeObj.colors);
+    }
     setLoaded(true);
   }, []);
+
+  React.useEffect(() => {
+    const urlObj = { gist, lang, colors };
+    setUrl(LZUTF8.compress(JSON.stringify(urlObj), { outputEncoding: "Base64" }));
+  }, [gist, colors, lang]);
+
+  React.useEffect(() => {
+    if (url.length > 0 && url.length < 2000) {
+      window.location.hash = url;
+    } else {
+      window.location.hash = "";
+    }
+  }, [url]);
 
   const changeLang = (e) => {
     const lang = e.value;
@@ -126,7 +148,7 @@ function App() {
     }
   };
 
-  const editorProps = { angle, colors, loaded, gist, mimeType, attribution, hover };
+  const editorProps = { angle, colors, loaded, gist, mimeType, attribution, hover, setGist };
   const settingsProps = {
     getGist,
     isSafari,
