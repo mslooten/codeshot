@@ -3434,6 +3434,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+lzutf8@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/lzutf8/-/lzutf8-0.5.6.tgz#8cbdaf573ffb9f0f195f9d2e7ea56c44f8e9d5d6"
+  integrity sha512-nZT9HP+xe9FxhRj0DIHb/7jVeFdIQkOul8ebCYc5bMevmuzZZYbsjwFlg+UfO8GTQMfiGU2Fyt8JXtffeKF0Kg==
+
 make-dir@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
