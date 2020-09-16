@@ -3,7 +3,7 @@ import { UnControlled } from 'react-codemirror2';
 import { ResizableBox } from 'react-resizable';
 
 const Editor = (props) => {
-  const { angle, colors, loaded, gist, mimeType, attribution, hover } = props;
+  const { angle, colors, loaded, gist, mimeType, attribution, hover, setGist } = props;
   return (
     <ResizableBox width={800} height={460} minConstraints={[600, 460]} axis="x">
       <div id="codeshot" className="relative">
@@ -17,6 +17,7 @@ const Editor = (props) => {
             {loaded && (
               <UnControlled
                 value={gist}
+                onChange={(editor, data, value) => setGist(value)}
                 options={{
                   mode: mimeType,
                   theme: "material",
