@@ -49,26 +49,6 @@ function App() {
       setLang(codeObj.lang);
       setMime((mimes && mimes[0]) || mime);
       setColors(codeObj.colors);
-      const code = document.getElementById("codeshot");
-      const scale = 2;
-      let obj = {
-        height: code.offsetHeight * scale,
-        style: {
-          transform: `scale(${scale}) translate(${code.offsetWidth / 2 / scale}px, ${code.offsetHeight / 2 / scale}px)`
-        },
-        width: code.offsetWidth * scale
-      };
-      domtoimage.toBlob(code, obj).then((blob) => {
-        const reader = new FileReader();
-        reader.addEventListener(
-          "load",
-          function () {
-            setImage(reader.result);
-          },
-          false
-        );
-        reader.readAsDataURL(blob);
-      });
     }
     setLoaded(true);
   }, []);
@@ -205,7 +185,7 @@ function App() {
 
   return (
     <>
-      <Header image={image} />
+      <Header />
 
       <div className="container mx-auto mw-1/2 p-6">
         <div className="flex justify-center items-center mb-4">
@@ -236,7 +216,7 @@ function App() {
           <label className="block text-gray-600 text-sm font-bold mb-6">
             Share url: <span className="font-normal text-xs text-gray-500">(With this link you can share this exact code snippet!)</span>
             <input
-              value={`https://snippetshot.com/#${url}`}
+              value={`https://www.snippetshot.com/#${url}`}
               readOnly
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               onClick={(e) => e.target.select()}

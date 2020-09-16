@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 
-const Header = ({ image }) => {
+const Header = () => {
   return (
     <Head>
       <link rel="icon" href="/favicon.ico" />
@@ -12,7 +12,7 @@ const Header = ({ image }) => {
       <meta name="twitter:site" content="Snippet Shot" />
       <meta name="twitter:title" content="Snippet Shot: Beautiful code screenshots" />
       <meta name="twitter:description" content="Create a screenshot from a code snippet" />
-      <meta name="twitter:image" content={image || "https://www.snippetshot.com/snippetshot.png"} />
+      <meta name="twitter:image" content="https://www.snippetshot.com/snippetshot.png" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/manifest.json" />
 
