@@ -8,7 +8,7 @@ const Header = ({ image }) => {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#000000" />
       <meta name="description" content="Create a screenshot from a code snippet" />
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="Snippet Shot" />
       <meta name="twitter:title" content="Snippet Shot: Beautiful code screenshots" />
       <meta name="twitter:description" content="Create a screenshot from a code snippet" />
