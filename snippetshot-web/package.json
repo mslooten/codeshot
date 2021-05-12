@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "codemirror": "^5.56.0",
+    "codemirror": "^5.58.2",
     "cross-env": "5.0.5",
     "dom-to-image": "^2.6.0",
     "dotenv": "^8.2.0",
